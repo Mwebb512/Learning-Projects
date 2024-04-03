@@ -80,22 +80,10 @@ Sprite Pixel On XOR Display Pixel On = Display Pixel Off
 
 //class for the Chip
 //initialize all values to 0
-class Chip8{
-    public:
-        uint8_t registors[16]{};
-        uint8_t memory[4096]{};
-        uint16_t index{};
-        uint16_t pc{};
-        uint16_t stack[16]{};
-        uint8_t sp{};
-        uint8_t delayTimer{};
-        uint8_t soundTimer{};
-        uint8_t keypad[16]{};
-        uint32_t video[16 * 32]{};
-        uint16_t opcode;
 
-};
 const unsigned int FONTSET_SIZE = 80;
+const unsigned int FONTSET_START_ADDRESS = 0x50;
+const unsigned int START_ADDRESS = 0x200;
 
 uint8_t fontset[FONTSET_SIZE] =
 {
@@ -118,8 +106,7 @@ uint8_t fontset[FONTSET_SIZE] =
 };
 
 
-Chip8::Chip8()
-    : randGen(std::chrono::system_clock::now().timesince_epoch().count(){
+Chip8::Chip8():randGen(std::chrono::system_clock::now().timesince_epoch().count(){
     pc = START_ADDRESS;
 
 
@@ -129,7 +116,7 @@ Chip8::Chip8()
 	}
 }
 //start address needs to be 0x200 because that is where the instructions are stored
-const unsigned int START_ADDRESS  = 0x200;
+
 
 //need to load the rom instructions
 void Chip8::LoadROM(char const* filename){
