@@ -1,11 +1,11 @@
 //api/index.js
-var socket = new WebSocket("ws://localhost:8080/ws");
+var socket = new WebSocket("ws://localhost:3000/ws");
 
 //interacts with out server that was setup in main.go
 
 //this function connects to the websocket endpoint
 //and listens for events.
-let connect = () =>{
+let connect = cb =>{
     console.log("Attempting Connection...")
 
     socket.onopen = () => {
@@ -14,6 +14,7 @@ let connect = () =>{
 
     socket.onmessage = msg => {
         console.log(msg);
+        cb(msg);
     };
 
     socket.onclose = event =>{
